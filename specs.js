@@ -94,7 +94,20 @@ describe('javaScript', function () {
         var itemC = function  (){
             return f1();
         };
-    })    
+    });
+    
+    
+    it('this', function() {
+        function f1 (){
+            expect(this.itemA === 2).toBeTruthy();           
+        };
+        
+        var itemA = 1;
+        var itemB = {itemA: 2, f1: f1};
+        itemB.f1();
+    });
+    
+      
        
 });
 
