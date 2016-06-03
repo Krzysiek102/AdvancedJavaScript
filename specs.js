@@ -99,12 +99,32 @@ describe('javaScript', function () {
     
     it('this', function() {
         function f1 (){
-            expect(this.itemA === 2).toBeTruthy();           
-        };
-        
+            //expect(this.itemA === 1).toBeTruthy(); 
+        }
         var itemA = 1;
-        var itemB = {itemA: 2, f1: f1};
-        itemB.f1();
+        f1();
+        
+        
+        function f2 (){
+            var itemB = 1;
+            expect(this.itemB === undefined).toBeTruthy();
+        }
+        var f2Item = new f2();
+        
+        
+        function f3 (){
+            this.itemC = 1;
+            expect(this.itemC === 1).toBeTruthy();
+        }
+        var f3Item = new f3();        
+    
+    
+        function f4 (){
+            expect(this.itemG === 2).toBeTruthy();           
+        };
+        var itemG = 1;
+        var itemF = {itemG: 2, f4: f4};
+        itemF.f4();
     });
     
       
