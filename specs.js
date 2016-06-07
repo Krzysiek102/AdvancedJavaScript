@@ -3,23 +3,23 @@
 
 describe('javaScript', function () {
 
-    it('scope tests', function () {
+    it('scope', function () {
         var itemA = 1;
-        
+
         function f1(){
             expect(itemA === undefined).toBeTruthy();
             var itemA = 2;
             expect(itemA === 2).toBeTruthy();
         };
-        
+
         function f2(itemA){
             expect(itemA === undefined).toBeTruthy();
             itemA = 3;
-            itemB = 4;
-            
+            itemB = 4;  
+
             var itemC = 5;
         };
-        
+
         f1();
         expect(itemA === 1).toBeTruthy();
         f2();
@@ -28,8 +28,8 @@ describe('javaScript', function () {
         //expect(itemC === ).toBeTruthy();
         var itemB;
     });
-    
-    
+
+
     it('named function expression', function  (){
         var functionExpression = function functionHiddenDeclaration (param1){
             function innerFunction (){
@@ -48,14 +48,14 @@ describe('javaScript', function () {
         expect(functionExpression(0) === 0).toBeTruthy();
         //expect(functionHiddenDeclaration(0) === 0).toBeTruthy();
     });
-    
-    
+
+
     it('IIFE', function() {
         var itemA = 1;
         var itemB = 1;
         (function f1(param1){
             expect(itemA === 1).toBeTruthy();
-            expect(itemB === undefined).toBeTruthy();            
+            expect(itemB === undefined).toBeTruthy();
             itemA = param1;
             var itemB;
             itemB = 2;
@@ -66,8 +66,8 @@ describe('javaScript', function () {
         //expect(itemC === undefined).toBeTruthy();
         //expect(f1() === undefined).toBeTruthy();
     });
-    
-    
+
+
     it('let', function() {
         //expect(itemA === undefined).toBeTruthy();
         expect(itemB === undefined).toBeTruthy();
@@ -95,41 +95,54 @@ describe('javaScript', function () {
             return f1();
         };
     });
-    
-    
-    it('this', function() {
+
+
+    it('this - implicit binding', function() {
         function f1 (){
-            //expect(this.itemA === 1).toBeTruthy(); 
+            //expect(this.itemA === 1).toBeTruthy();
         }
         var itemA = 1;
         f1();
-        
-        
+
         function f2 (){
-            var itemB = 1;
-            expect(this.itemB === undefined).toBeTruthy();
+            expect(this.itemB === 2).toBeTruthy();
+        };
+        var itemB = 1;
+        var itemC = {itemB: 2, f4: f2};
+        itemC.f4();
+    });
+
+
+    it('call - explicit binding', function() {
+        function foo (){
+            expect(this.bar).toBe("bar2");
+        }
+
+        var bar = "bar1";
+        var obj = {bar: "bar2"};
+        foo.call(obj);
+    });
+
+
+
+    it('this - new binding', function() {
+        function f1 (){
+            var itemA = 1;
+            expect(this.itemA === undefined).toBeTruthy();
+        }
+        var f1Item = new f1();
+
+
+        function f2 (){
+            this.itemB = 1;
+            expect(this.itemB === 1).toBeTruthy();
         }
         var f2Item = new f2();
-        
-        
-        function f3 (){
-            this.itemC = 1;
-            expect(this.itemC === 1).toBeTruthy();
-        }
-        var f3Item = new f3();        
-    
-    
-        function f4 (){
-            expect(this.itemG === 2).toBeTruthy();           
-        };
-        var itemG = 1;
-        var itemF = {itemG: 2, f4: f4};
-        itemF.f4();
     });
-    
-      
-       
+
+
+
+
 });
 
 
-    
