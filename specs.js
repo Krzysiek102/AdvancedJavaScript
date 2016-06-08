@@ -114,34 +114,108 @@ describe('javaScript', function () {
 
 
     it('call - explicit binding', function() {
-        function foo (){
-            expect(this.bar).toBe("bar2");
+        function f1 (){
+            expect(this.itemA).toBe(2);
         }
 
-        var bar = "bar1";
-        var obj = {bar: "bar2"};
-        foo.call(obj);
+        var itemA = 1;
+        var itemB = {itemA: 2};
+        f1.call(itemB);
     });
 
+    
+    it('call - explicit binding - hard binding example', function() {
+        function f1 (){
+            expect(this.itemA === 1).toBeTruthy();
+        }
 
+        var obj1 = {itemA: 1};
+        var obj2 = {itemA: 2};
 
+        var f2 = f1;
+        f1 = function(){
+            f2.call(obj1);
+        }
+
+        f1.call(obj2);
+    });
+
+    it('call - explicit binding - dedicated bind function', function() {
+        function bind (fn, obj){
+            return function(){
+                fn.call(obj);
+            }
+        }
+        function f1 (){
+            expect(this.itemA === 1).toBeTruthy();
+        }
+
+        var obj1 = {itemA: 1};
+        var obj2 = {itemA: 2};
+
+        f1 = bind(f1, obj1);
+
+        f1.call(obj2);
+    });    
+
+    
+    it('bind function from ES5', function() {
+        function f1 (){
+            expect(this.itemA === 1).toBeTruthy();
+        }
+
+        var obj1 = {itemA: 1};
+        var obj2 = {itemA: 2};
+
+        f1 = f1.bind(obj1);
+
+        f1.call(obj2);
+    });
+        
     it('this - new binding', function() {
         function f1 (){
             var itemA = 1;
             expect(this.itemA === undefined).toBeTruthy();
         }
-        var f1Item = new f1();
-
+        var obj1 = new f1();
 
         function f2 (){
             this.itemB = 1;
             expect(this.itemB === 1).toBeTruthy();
         }
-        var f2Item = new f2();
+        var obj2 = new f2();
     });
 
+    it('this - new vs hard binding', function() {
+        function f1 (){
+            expect(this.itemA === undefined).toBeTruthy();
+        }
 
+        var obj1 = {itemA: 1};
+        var obj2 = {itemA: 2};
 
+        f1 = f1.bind(obj1);
+
+        var obj3 = new f1();
+    });
+
+    
+    it('closure', function() {
+        function f1 (){
+            var itemA = 1;
+            function f1Internal (){
+                expect(itemA === 1).toBeTruthy();
+            }
+            f2(f1Internal);
+        }
+
+        function f2(f2Internal){
+            f2Internal();
+        } 
+
+        f1();
+    });
+            
 
 });
 
