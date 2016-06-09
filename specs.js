@@ -7,13 +7,13 @@ describe('javaScript', function () {
         var itemA = 1;
 
         function f1() {
-            expect(itemA === undefined).toBeTruthy();
+            //expect(itemA === ).toBeTruthy();
             var itemA = 2;
-            expect(itemA === 2).toBeTruthy();
+            //expect(itemA === ).toBeTruthy();
         };
 
         function f2(itemA) {
-            expect(itemA === undefined).toBeTruthy();
+            //expect(itemA === ).toBeTruthy();
             itemA = 3;
             itemB = 4;
 
@@ -21,10 +21,10 @@ describe('javaScript', function () {
         };
 
         f1();
-        expect(itemA === 1).toBeTruthy();
+        //expect(itemA === ).toBeTruthy();
         f2();
-        expect(itemB === 4).toBeTruthy();
-        expect(itemA === 1).toBeTruthy();
+        //expect(itemB === ).toBeTruthy();
+        //expect(itemA === ).toBeTruthy();
         //expect(itemC === ).toBeTruthy();
         var itemB;
     });
@@ -43,9 +43,9 @@ describe('javaScript', function () {
             }
             return innerFunction();
         }
-        expect(functionExpression(2) === 1).toBeTruthy();
+        //expect(functionExpression(2) === ).toBeTruthy();
         //expect(functionHiddenDeclaration(2) === ).toBeTruthy();
-        expect(functionExpression(0) === 0).toBeTruthy();
+        //expect(functionExpression(0) === ).toBeTruthy();
         //expect(functionHiddenDeclaration(0) === ).toBeTruthy();
     });
 
@@ -54,15 +54,15 @@ describe('javaScript', function () {
         var itemA = 1;
         var itemB = 1;
         (function f1(param1) {
-            expect(itemA === 1).toBeTruthy();
-            expect(itemB === undefined).toBeTruthy();
+            //expect(itemA === ).toBeTruthy();
+            //expect(itemB === ).toBeTruthy();
             itemA = param1;
             var itemB;
             itemB = 2;
             var itemC = 1;
         })(2);
-        expect(itemA === 2).toBeTruthy();
-        expect(itemB === 1).toBeTruthy();
+        //expect(itemA === ).toBeTruthy();
+        //expect(itemB === ).toBeTruthy();
         //expect(itemC === ).toBeTruthy();
         //expect(f1() === ).toBeTruthy();
     });
@@ -70,24 +70,24 @@ describe('javaScript', function () {
 
     it('let', function () {
         //expect(itemA === ).toBeTruthy();
-        expect(itemB === undefined).toBeTruthy();
+        //expect(itemB === ).toBeTruthy();
         if (true) {
             //expect(itemA === ).toBeTruthy();
-            expect(itemB === undefined).toBeTruthy();
+            //expect(itemB === ).toBeTruthy();
             let itemA = 1;
             var itemB = 1;
-            expect(itemA === 1).toBeTruthy();
-            expect(itemB === 1).toBeTruthy();
+            //expect(itemA === ).toBeTruthy();
+            //expect(itemB === ).toBeTruthy();
         };
         //expect(itemA === ).toBeTruthy();
-        expect(itemB === 1).toBeTruthy();
+        //expect(itemB === ).toBeTruthy();
     });
 
     it('hoisting', function () {
         var itemA = f1();
         var itemB = itemC;
-        expect(itemA === 1).toBeTruthy();
-        expect(itemB === undefined).toBeTruthy();
+        //expect(itemA === ).toBeTruthy();
+        //expect(itemB === ).toBeTruthy();
         function f1() {
             return 1;
         };
@@ -100,13 +100,13 @@ describe('javaScript', function () {
     it('this - implicit binding', function () {
         function f1() {
             //expect(this.itemA === ).toBeTruthy();
-            expect(itemA === 1).toBeTruthy();
+            //expect(itemA === ).toBeTruthy();
         }
         var itemA = 1;
         f1();
 
         function f2() {
-            expect(this.itemB === 2).toBeTruthy();
+            //expect(this.itemB === ).toBeTruthy();
         };
         var itemB = 1;
         var itemC = { itemB: 2, f3: f2 };
@@ -116,7 +116,7 @@ describe('javaScript', function () {
 
     it('call - explicit binding', function () {
         function f1() {
-            expect(this.itemA === 2).toBeTruthy();
+            //expect(this.itemA === ).toBeTruthy();
         }
 
         var itemA = 1;
@@ -127,7 +127,7 @@ describe('javaScript', function () {
 
     it('call - explicit binding - manual hard binding example', function () {
         function f1() {
-            expect(this.itemA === 1).toBeTruthy();
+            //expect(this.itemA === ).toBeTruthy();
         }
 
         var obj1 = { itemA: 1 };
@@ -148,7 +148,7 @@ describe('javaScript', function () {
             }
         }
         function f1() {
-            expect(this.itemA === 1).toBeTruthy();
+            //expect(this.itemA === ).toBeTruthy();
         }
 
         var obj1 = { itemA: 1 };
@@ -162,7 +162,7 @@ describe('javaScript', function () {
 
     it('bind function from ES5', function () {
         function f1() {
-            expect(this.itemA === 1).toBeTruthy();
+            //expect(this.itemA === ).toBeTruthy();
         }
 
         var obj1 = { itemA: 1 };
@@ -178,18 +178,18 @@ describe('javaScript', function () {
             var itemA = 1;
         }
         var obj1 = new f1();
-        expect(obj1.itemA === undefined).toBeTruthy();
+        //expect(obj1.itemA === ).toBeTruthy();
 
         function f2() {
             this.itemB = 1;
         }
         var obj2 = new f2();
-        expect(obj2.itemB === 1).toBeTruthy();
+        //expect(obj2.itemB === ).toBeTruthy();
     });
 
     it('this - new vs hard binding', function () {
         function f1() {
-            expect(this.itemA === undefined).toBeTruthy();
+            //expect(this.itemA === ).toBeTruthy();
         }
 
         var obj1 = { itemA: 1 };
@@ -204,7 +204,7 @@ describe('javaScript', function () {
         function f1() {
             var itemA = 1;
             function f1Inner() {
-                expect(itemA === 1).toBeTruthy();
+                //expect(itemA === ).toBeTruthy();
             }
             f2(f1Inner);
         }
@@ -222,7 +222,7 @@ describe('javaScript', function () {
         function f1() {
             var itemA = 1;
             setTimeout(function f1Inner() {
-                expect(itemA === 1).toBeTruthy();
+                //expect(itemA === ).toBeTruthy();
                 done();
             }, 50);
         }
@@ -241,7 +241,7 @@ describe('javaScript', function () {
         }
         f1();
         setTimeout(function () {
-            expect(sum === 6).toBeTruthy();
+            //expect(sum === ).toBeTruthy();
             done();
         }, 100);
     });  
@@ -259,7 +259,7 @@ describe('javaScript', function () {
         }
         f1();
         setTimeout(function () {
-            expect(sum === 3).toBeTruthy();
+            //expect(sum === ).toBeTruthy();
             done();
         }, 100);
     }); 
@@ -275,7 +275,7 @@ describe('javaScript', function () {
         }
         f1();
         setTimeout(function () {
-            expect(sum === 3).toBeTruthy();
+            //expect(sum === ).toBeTruthy();
             done();
         }, 100);
     });    
@@ -290,8 +290,8 @@ describe('javaScript', function () {
             }
         })();
 
-        expect(module1.f1() === 1).toBeTruthy();
-        expect(module1.privateItemA === undefined).toBeTruthy();
+        //expect(module1.f1() === ).toBeTruthy();
+        //expect(module1.privateItemA === ).toBeTruthy();
     });
 
     
@@ -309,9 +309,9 @@ describe('javaScript', function () {
             return publicMembers;
         })();
 
-        expect(module1.f1() === 1).toBeTruthy();
-        expect(module1.f2() === 2).toBeTruthy();
-        expect(module1.privateItemA === undefined).toBeTruthy();
+        //expect(module1.f1() === ).toBeTruthy();
+        //expect(module1.f2() === ).toBeTruthy();
+        //expect(module1.privateItemA === ).toBeTruthy();
     });
 
 });
