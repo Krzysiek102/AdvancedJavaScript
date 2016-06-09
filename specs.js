@@ -44,9 +44,9 @@ describe('javaScript', function () {
             return innerFunction();
         }
         expect(functionExpression(2) === 1).toBeTruthy();
-        //expect(functionHiddenDeclaration(2) === 1).toBeTruthy();
+        //expect(functionHiddenDeclaration(2) === ).toBeTruthy();
         expect(functionExpression(0) === 0).toBeTruthy();
-        //expect(functionHiddenDeclaration(0) === 0).toBeTruthy();
+        //expect(functionHiddenDeclaration(0) === ).toBeTruthy();
     });
 
 
@@ -63,23 +63,23 @@ describe('javaScript', function () {
         })(2);
         expect(itemA === 2).toBeTruthy();
         expect(itemB === 1).toBeTruthy();
-        //expect(itemC === undefined).toBeTruthy();
-        //expect(f1() === undefined).toBeTruthy();
+        //expect(itemC === ).toBeTruthy();
+        //expect(f1() === ).toBeTruthy();
     });
 
 
     it('let', function () {
-        //expect(itemA === undefined).toBeTruthy();
+        //expect(itemA === ).toBeTruthy();
         expect(itemB === undefined).toBeTruthy();
         if (true) {
-            //expect(itemA === undefined).toBeTruthy();
+            //expect(itemA === ).toBeTruthy();
             expect(itemB === undefined).toBeTruthy();
             let itemA = 1;
             var itemB = 1;
             expect(itemA === 1).toBeTruthy();
             expect(itemB === 1).toBeTruthy();
         };
-        //expect(itemA === undefined).toBeTruthy();
+        //expect(itemA === ).toBeTruthy();
         expect(itemB === 1).toBeTruthy();
     });
 
@@ -99,7 +99,7 @@ describe('javaScript', function () {
 
     it('this - implicit binding', function () {
         function f1() {
-            //expect(this.itemA === 1).toBeTruthy();
+            //expect(this.itemA === ).toBeTruthy();
             expect(itemA === 1).toBeTruthy();
         }
         var itemA = 1;
@@ -116,12 +116,12 @@ describe('javaScript', function () {
 
     it('call - explicit binding', function () {
         function f1() {
-            expect(this.itemA).toBe(2);
+            expect(this.itemA === 2).toBeTruthy();
         }
 
         var itemA = 1;
         var itemB = { itemA: 2 };
-        f1.call(itemB);
+        f1.apply(itemB);
     });
 
 
