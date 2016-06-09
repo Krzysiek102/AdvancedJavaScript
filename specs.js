@@ -311,6 +311,7 @@ describe('javaScript', function () {
 
         expect(module1.f1() === 1).toBeTruthy();
         expect(module1.f2() === 2).toBeTruthy();
+        expect(module1.privateItemA === undefined).toBeTruthy();
     });
 
 });
