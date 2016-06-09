@@ -100,6 +100,7 @@ describe('javaScript', function () {
     it('this - implicit binding', function () {
         function f1() {
             //expect(this.itemA === 1).toBeTruthy();
+            expect(itemA === 1).toBeTruthy();
         }
         var itemA = 1;
         f1();
@@ -108,8 +109,8 @@ describe('javaScript', function () {
             expect(this.itemB === 2).toBeTruthy();
         };
         var itemB = 1;
-        var itemC = { itemB: 2, f4: f2 };
-        itemC.f4();
+        var itemC = { itemB: 2, f3: f2 };
+        itemC.f3();
     });
 
 
@@ -124,7 +125,7 @@ describe('javaScript', function () {
     });
 
 
-    it('call - explicit binding - hard binding example', function () {
+    it('call - explicit binding - manual hard binding example', function () {
         function f1() {
             expect(this.itemA === 1).toBeTruthy();
         }
@@ -132,9 +133,9 @@ describe('javaScript', function () {
         var obj1 = { itemA: 1 };
         var obj2 = { itemA: 2 };
 
-        var f2 = f1;
+        var ftemp = f1;
         f1 = function () {
-            f2.call(obj1);
+            ftemp.call(obj1);
         }
 
         f1.call(obj2);
@@ -175,15 +176,15 @@ describe('javaScript', function () {
     it('this - new binding', function () {
         function f1() {
             var itemA = 1;
-            expect(this.itemA === undefined).toBeTruthy();
         }
         var obj1 = new f1();
+        expect(obj1.itemA === undefined).toBeTruthy();
 
         function f2() {
             this.itemB = 1;
-            expect(this.itemB === 1).toBeTruthy();
         }
         var obj2 = new f2();
+        expect(obj2.itemB === 1).toBeTruthy();
     });
 
     it('this - new vs hard binding', function () {
@@ -192,7 +193,6 @@ describe('javaScript', function () {
         }
 
         var obj1 = { itemA: 1 };
-        var obj2 = { itemA: 2 };
 
         f1 = f1.bind(obj1);
 
@@ -203,16 +203,17 @@ describe('javaScript', function () {
     it('closure', function () {
         function f1() {
             var itemA = 1;
-            function f1Internal() {
+            function f1Inner() {
                 expect(itemA === 1).toBeTruthy();
             }
-            f2(f1Internal);
+            f2(f1Inner);
         }
 
-        function f2(f2Internal) {
-            f2Internal();
+        function f2(f3) {
+            var itemA = 2;
+            f3();
         }
-
+        var itemA = 3;        
         f1();
     });
 
@@ -220,7 +221,7 @@ describe('javaScript', function () {
     it('closure set timeout', function (done) {
         function f1() {
             var itemA = 1;
-            setTimeout(function () {
+            setTimeout(function f1Inner() {
                 expect(itemA === 1).toBeTruthy();
                 done();
             }, 50);
@@ -233,7 +234,7 @@ describe('javaScript', function () {
         var sum = 0;
         function f1() {
             for (var i = 1; i <= 2; i++) {
-                setTimeout(function () {
+                setTimeout(function f1Inner() {
                     sum+=i;
                 }, 50);
             }
@@ -249,8 +250,8 @@ describe('javaScript', function () {
         var sum = 0;
         function f1() {
             for (var i = 1; i <= 2; i++) {
-                (function(i){
-                    setTimeout(function () {
+                (function (i){
+                    setTimeout(function f1Inner() {
                         sum+=i;
                     }, 50);                    
                 })(i);
@@ -290,21 +291,22 @@ describe('javaScript', function () {
         })();
 
         expect(module1.f1() === 1).toBeTruthy();
+        expect(module1.privateItemA === undefined).toBeTruthy();
     });
 
     
-    it('module pattern returning api', function() {
+    it('module pattern with object collecting public members', function() {
         var module1 = (function module1Func(){
             var privateItemA = 1;
-            var api= {
+            var publicMembers = {
                 f1: function  (){
                     return privateItemA;
                 }
             };
-            api.f2 = function  (){
+            publicMembers.f2 = function  (){
                     return 2;
                 }
-            return api;
+            return publicMembers;
         })();
 
         expect(module1.f1() === 1).toBeTruthy();
