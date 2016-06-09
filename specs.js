@@ -25,7 +25,7 @@ describe('javaScript', function () {
         f2();
         expect(itemB === 4).toBeTruthy();
         expect(itemA === 1).toBeTruthy();
-        //expect(itemC === ).toBeTruthy();
+        expect(function(){ itemC }).toThrow();
         var itemB;
     });
 
@@ -44,9 +44,9 @@ describe('javaScript', function () {
             return innerFunction();
         }
         expect(functionExpression(2) === 1).toBeTruthy();
-        //expect(functionHiddenDeclaration(2) === ).toBeTruthy();
+        expect(function(){ functionHiddenDeclaration(2) }).toThrow();
         expect(functionExpression(0) === 0).toBeTruthy();
-        //expect(functionHiddenDeclaration(0) === ).toBeTruthy();
+        expect(function(){ functionHiddenDeclaration(0) }).toThrow();
     });
 
 
@@ -63,23 +63,23 @@ describe('javaScript', function () {
         })(2);
         expect(itemA === 2).toBeTruthy();
         expect(itemB === 1).toBeTruthy();
-        //expect(itemC === ).toBeTruthy();
-        //expect(f1() === ).toBeTruthy();
+        expect(function(){ itemC }).toThrow();
+        expect(function(){ f1() }).toThrow();
     });
 
 
     it('let', function () {
-        //expect(itemA === ).toBeTruthy();
+        expect(function(){ itemA }).toThrow();
         expect(itemB === undefined).toBeTruthy();
         if (true) {
-            //expect(itemA === ).toBeTruthy();
+            expect(function(){ itemA }).toThrow();
             expect(itemB === undefined).toBeTruthy();
             let itemA = 1;
             var itemB = 1;
             expect(itemA === 1).toBeTruthy();
             expect(itemB === 1).toBeTruthy();
         };
-        //expect(itemA === ).toBeTruthy();
+        expect(function(){ itemA }).toThrow();
         expect(itemB === 1).toBeTruthy();
     });
 
@@ -99,7 +99,7 @@ describe('javaScript', function () {
 
     it('this - implicit binding', function () {
         function f1() {
-            //expect(this.itemA === ).toBeTruthy();
+            expect(function(){ this.itemA }).toThrow();
             expect(itemA === 1).toBeTruthy();
         }
         var itemA = 1;
