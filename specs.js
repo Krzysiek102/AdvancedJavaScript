@@ -107,6 +107,7 @@ describe('javaScript', function () {
 
         function f2() {
             //expect(this.itemB === ).toBeTruthy();
+            //expect(itemB === ).toBeTruthy();
         };
         var itemB = 1;
         var itemC = { itemB: 2, f3: f2 };
@@ -114,16 +115,32 @@ describe('javaScript', function () {
     });
 
 
-    it('call - explicit binding', function () {
-        function f1() {
+    it('explicit binding - call', function () {
+        function f1(param1, param2, param3) {
             //expect(this.itemA === ).toBeTruthy();
+            //expect(param1 === ).toBeTruthy();
+            //expect(param2 === ).toBeTruthy();
+            //expect(param3 === ).toBeTruthy();
         }
 
         var itemA = 1;
         var itemB = { itemA: 2 };
-        f1.apply(itemB);
+        f1.call(itemB, 2, 3);
     });
 
+
+    it('explicit binding - apply', function () {
+        function f1(param1, param2, param3) {
+            //expect(this.itemA === ).toBeTruthy();
+            //expect(param1 === ).toBeTruthy();
+            //expect(param2 === ).toBeTruthy();
+            //expect(param3 === ).toBeTruthy();            
+        }
+
+        var itemA = 1;
+        var itemB = { itemA: 2 };
+        f1.apply(itemB, [2,3]);
+    });
 
     it('call - explicit binding - manual hard binding example', function () {
         function f1() {
